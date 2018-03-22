@@ -4,3 +4,5 @@ AS
 SELECT Cliente.nome_cliente AS [Cliente], Dvd_Jogo.nome_jogo AS [Jogo], Aluguel.preco_aluguel AS [Preço]
 FROM Cliente, Dvd_Jogo, Aluguel
 WHERE Cliente.id_cliente = Aluguel.Cliente_id_cliente AND Aluguel.Dvd_Jogo_id_jogo = Dvd_Jogo.id_jogo
+
+SELECT * FROM Cliente_jogo
