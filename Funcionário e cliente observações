@@ -1,0 +1,9 @@
+-- Funcionario + Cliente --
+SELECT * FROM Cliente CROSS JOIN Funcionario
+
+-- Descrição Cliente + Funcionário --
+CREATE VIEW Descricao
+AS
+SELECT Cliente.observacao_cliente AS [Observação Cliente], Funcionario.obeservacao_func AS [Observação Funcionáro]
+FROM Cliente JOIN Funcionario
+ON Funcionario.id_funcionario = Cliente.id_cliente
