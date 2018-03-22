@@ -1,0 +1,4 @@
+-- Jogos --
+SELECT D.id_jogo, D.nome_jogo, D.descricao, D.jogo_console
+FROM Dvd_Jogo D INNER JOIN Aluguel A
+ON D.id_jogo = A.Dvd_Jogo_id_jogo
