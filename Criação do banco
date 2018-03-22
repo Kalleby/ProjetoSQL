@@ -1,0 +1,254 @@
+CREATE DATABASE PROJETOBD
+
+USE PROJETOBD
+
+CREATE TABLE Dvd_Jogo (
+  id_jogo INTEGER  NOT NULL   IDENTITY ,
+  nome_jogo VARCHAR(50) UNIQUE   ,
+  jogo_console VARCHAR(50)    ,
+  esrb CHAR(2)    ,
+  referencia VARCHAR(50)    ,
+  descricao VARCHAR(100)    ,
+  desenvolvedora VARCHAR(50)    ,
+  publicadora VARCHAR(50)      ,
+PRIMARY KEY(id_jogo));
+GO
+
+
+INSERT INTO Dvd_Jogo
+VALUES
+('God Of War', 'PlayStation 2, PC', '18', 'SLUS', 'Jogo de ação e aventura sanguinário, onde você mata Deuses gregos.', 'SCE Santa Monica Studio', 'Sony'),
+('Rise Of The Tomb Raider', 'Xbox One - 360, PC', '18', 'BCUS', 'Jogo de ação e aventura, onde voce luta pela sobrevivência enquanto honra o nome de seu pai.', 'Crystal Dynamics', 'Square Enix'),
+('Dynasty Warriors 8', 'Xbox One - 360, PC', '12', 'BCUS', 'Ação onde você participa de diversas guerras', 'Omega Force', 'Tecmo Koei'),
+('Mortal Kombat X', 'Xbox One, PlayStation 4, PC', '18', 'SLUS', 'Luta, onde você pode desmembrar seu oponente', 'NetherRealm Studios', 'Warner Bros. Interactive Entertainment'),
+('Halo 5', 'Xbox One', '16', 'SLUS', 'First-person Shooter, jogo futurista de tiro', '343 Industries', 'Microsoft Studios');
+
+
+CREATE TABLE Pais (
+  id_pais INTEGER  NOT NULL   IDENTITY ,
+  nome_pais VARCHAR(20)      ,
+PRIMARY KEY(id_pais));
+GO
+
+INSERT INTO Pais
+VALUES
+('Brasil'),
+('Brasil'),
+('Brasil'),
+('Brasil'),
+('Brasil'),
+('Brasil'),
+('Brasil'),
+('Brasil'),
+('Brasil');
+
+select * from Pais
+CREATE TABLE Cep (
+  id_cep INTEGER  NOT NULL   IDENTITY ,
+  Pais_id_pais INTEGER  NOT NULL  ,
+  cod_postal VARCHAR(15)      ,
+PRIMARY KEY(id_cep)  ,
+  FOREIGN KEY(Pais_id_pais)
+    REFERENCES Pais(id_pais));
+GO
+
+INSERT INTO Cep
+VALUES
+(1,'83412-140'),
+(2,'82411-120'),
+(3,'81560-160'),
+(4,'85081-009'),
+(5,'89087-122'),
+(6,'85673-130'),
+(7,'87678-111'),
+(8,'88809-100'),
+(9,'87241-140');
+
+CREATE TABLE Estado (
+  id_estado INTEGER  NOT NULL   IDENTITY ,
+  Cep_id_cep INTEGER  NOT NULL  ,
+  nome_estado VARCHAR(30)      ,
+PRIMARY KEY(id_estado)  ,
+  FOREIGN KEY(Cep_id_cep)
+    REFERENCES Cep(id_cep));
+GO
+
+INSERT INTO Estado
+VALUES
+
+(1,'Paraná'),
+(2,'Paraná'),
+(3,'Paraná'),
+(4,'Paraná'),
+(5,'Paraná'),
+(6,'Paraná'),
+(7,'Paraná'),
+(8,'Paraná'),
+(9,'Paraná');
+
+
+CREATE TABLE Cidade (
+  id_cidade INTEGER  NOT NULL   IDENTITY ,
+  Estado_id_estado INTEGER  NOT NULL  ,
+  nome_cidade VARCHAR(30)  NOT NULL    ,
+PRIMARY KEY(id_cidade)  ,
+  FOREIGN KEY(Estado_id_estado)
+    REFERENCES Estado(id_estado));
+GO
+
+INSERT INTO Cidade
+VALUES
+
+(1, 'Curitiba'),
+(2, 'Colombo'),
+(3, 'Pinhais'),
+(4, 'Curitiba'),
+(5, 'Quatro Barras'),
+(6, 'Curitiba'),
+(7, 'Curitiba'),
+(8, 'Curitiba'),
+(9, 'Curitiba');
+
+CREATE TABLE Bairro (
+  id_bairro INTEGER  NOT NULL   IDENTITY ,
+  Cidade_id_cidade INTEGER  NOT NULL  ,
+  nome_bairro VARCHAR(50)      ,
+PRIMARY KEY(id_bairro)  ,
+  FOREIGN KEY(Cidade_id_cidade)
+    REFERENCES Cidade(id_cidade));
+GO
+
+INSERT INTO Bairro
+VALUES
+
+(1, 'Campo Comprido'),
+(2, 'Jd. Osasco'),
+(3, 'Jd. Veisópolis'),
+(4, 'Cabral'),
+(5, 'Jd. Panorama'),
+(6, 'Centro'),
+(7, 'Centro'),
+(8, 'Centro'),
+(9, 'Centro');
+
+
+CREATE TABLE Rua (
+  id_rua INTEGER  NOT NULL   IDENTITY ,
+  Bairro_id_bairro INTEGER  NOT NULL  ,
+  nome_rua VARCHAR(50)      ,
+PRIMARY KEY(id_rua)  ,
+  FOREIGN KEY(Bairro_id_bairro)
+    REFERENCES Bairro(id_bairro));
+GO
+
+INSERT INTO Rua
+VALUES
+
+(1,'Rua João Falarz'),
+(2,'Rua Tanagildo Berlesi'),
+(3,'Jacob Macanha'),
+(4,'Saldanha Marinho'),
+(5,'João Manika'),
+(6,'Marechal Floriano Peixoto'),
+(7,'Rua XV de Novembro'),
+(8,'Emiliano Perneta'),
+(9,'Rua Riachuelo');
+
+
+CREATE TABLE Endereco (
+  id_endereco INTEGER  NOT NULL   IDENTITY ,
+  Rua_id_rua INTEGER  NOT NULL    ,
+  Num INTEGER NOT NULL,
+PRIMARY KEY(id_endereco)  ,
+  FOREIGN KEY(Rua_id_rua)
+    REFERENCES Rua(id_rua));
+GO
+INSERT INTO Endereco
+VALUES
+
+(1, 90),
+(2,74),
+(3, 1235),
+(4, 12),
+(5 , 876),
+(6, 234),
+(7, 1024),
+(8,56),
+(9, 69);
+
+CREATE TABLE Funcionario (
+  id_funcionario INTEGER  NOT NULL   IDENTITY ,
+  Endereco_id_endereco INTEGER  NOT NULL  ,
+  periodo VARCHAR(15)    ,
+  cargo VARCHAR(25)    ,
+  salario FLOAT    ,
+  nome_func VARCHAR(50)    ,
+  rg VARCHAR(20)    ,
+  cpf VARCHAR(11)      ,
+  data_nasc VARCHAR(10)    ,
+  sexo CHAR(1)    ,
+  obeservacao_func VARCHAR(100)    ,
+PRIMARY KEY(id_funcionario)  ,
+  FOREIGN KEY(Endereco_id_endereco)
+    REFERENCES Endereco(id_endereco));
+GO
+
+INSERT INTO Funcionario
+VALUES
+
+(2,'Manhã e Tarde', 'Atendende', 1450.00, 'Gescrovalda Santos', '439535122', '09653412309', '23-09-1993', 'F', 'Altamente participativa e alegre'),
+(4,'Manhã', 'Faxineira', 950.00, 'Maria Da Silva', '409890765', '07856794453', '27-09-1969', 'F', 'Falta ao trabalho sem avisar então merece rever sua vaga'),
+(6,'Noite', 'Atendende', 1030.00, 'Cleiton Biscoito', '345678432', '06890856472', '16-10-1995', 'M', 'Um bom funcionário');
+
+select * from Funcionario
+CREATE TABLE Cliente (
+  id_cliente INTEGER  NOT NULL  IDENTITY,
+  Endereco_id_endereco INTEGER  NOT NULL  ,
+  nome_cliente VARCHAR(50)    ,
+  rg VARCHAR(20)    ,
+  cpf VARCHAR(11)  ,
+  data_nasc VARCHAR(10)    ,
+  sexo CHAR(1)    ,
+  Telefone VARCHAR(20)      ,
+  observacao_cliente VARCHAR(100)    ,
+PRIMARY KEY(id_cliente)  ,
+  FOREIGN KEY(Endereco_id_endereco)
+    REFERENCES Endereco(id_endereco));
+GO
+INSERT INTO Cliente
+VALUES
+
+(1, 'Geraldo Dos Santos Leite', '429434121', '08632473778', '13-03-1974', 'M','35623336','Cliente fiel e bom pagador'),
+(3, 'Lucas Otávio', '413456983', '09635438907', '24-01-1980','M','36066885', 'Cliente que não aparece muito para alugar'),
+(5, 'Ana Mocellin', '103459607', '08975698738', '01-09-1996','F','92533248', 'Cliente que que sempre atrasa a devulução dos jogos'),
+(7, 'Lúcio Flavio', '122334121', '08632473778', '13-03-1974', 'M','35623336','Cliente fiel e bom pagador'),
+(8, 'José Almeida', '469784121', '07832473778', '19-01-1994', 'M','39023336','Cliente fiel e bom pagador'),
+(9, 'Thiago Silva', '329434701', '01236473778', '21-05-1991', 'M','92623336','Cliente fiel e bom pagador');
+
+
+CREATE TABLE Aluguel (
+  id_aluguel INTEGER  NOT NULL   IDENTITY ,
+  Cliente_id_cliente INTEGER  NOT NULL  ,
+  Dvd_Jogo_id_jogo INTEGER  NOT NULL  ,
+  Funcionario_id_funcionario INTEGER  NOT NULL  ,
+  preco_aluguel REAL    ,
+  data_aluguel VARCHAR(10)    ,
+  data_devolucao VARCHAR(10)      ,
+PRIMARY KEY(id_aluguel)      ,
+  FOREIGN KEY(Funcionario_id_funcionario)
+    REFERENCES Funcionario(id_funcionario),
+  FOREIGN KEY(Dvd_Jogo_id_jogo)
+    REFERENCES Dvd_Jogo(id_jogo),
+  FOREIGN KEY(Cliente_id_cliente)
+    REFERENCES Cliente(id_cliente));
+GO
+
+INSERT INTO Aluguel
+VALUES
+
+(1,1, 1, 30.00, '12-10-2016', '19-10-2016'),
+(2,2, 1, 45.00, '09-11-2016', '18-11-2016'),
+(3,5, 3, 28.00, '08-09-2016', '14-09-2016'),
+(4,4, 3, 35.00, '10-08-2016', '18-08-2016'),
+(5,3, 1, 55.00, '15-10-2016', '24-10-2016'),
+(6,2, 3, 95.00, '01-12-2016', '21-12-2016');
