@@ -1,0 +1,5 @@
+--Endereço--
+SELECT Cliente.nome_cliente, Pais.nome_pais, Cep.cod_postal, Estado.nome_estado, Cidade.nome_cidade, Bairro.nome_bairro, Rua.nome_rua, Endereco.Num
+FROM Cliente, Pais, Cep, Estado, Cidade, Rua, Bairro, Endereco
+WHERE Cliente.Endereco_id_endereco = Endereco.id_endereco AND Pais.id_pais = Cep.Pais_id_pais AND Cep.id_cep = Estado.Cep_id_cep AND Estado.id_estado = Cidade.Estado_id_estado AND Cidade.id_cidade = Bairro.Cidade_id_cidade
+AND Bairro.id_bairro = Rua.Bairro_id_bairro AND Rua.id_rua = Endereco.Rua_id_rua
