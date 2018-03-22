@@ -1,2 +1,0 @@
--- Contando Clientes Homens --
-SELECT COUNT (*) AS HOMENS FROM Cliente WHERE sexo = 'M'

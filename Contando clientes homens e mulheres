@@ -1,0 +1,5 @@
+-- Contando Clientes Homens --
+SELECT COUNT (*) AS HOMENS FROM Cliente WHERE sexo = 'M'
+
+-- Contando Cliente Mulheres
+SELECT COUNT (*) AS MULHERES FROM Cliente WHERE sexo = 'F'
