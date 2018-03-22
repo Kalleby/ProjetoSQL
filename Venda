@@ -1,0 +1,4 @@
+--Venda--
+SELECT Funcionario.id_funcionario, Funcionario.nome_func, Funcionario.periodo, Cliente.nome_cliente, Dvd_Jogo.nome_jogo, Aluguel.preco_aluguel, Aluguel.data_aluguel
+FROM Funcionario, Cliente, Aluguel, Dvd_Jogo
+WHERE Funcionario.id_funcionario = Aluguel.Funcionario_id_funcionario AND Cliente.id_cliente = Aluguel.Cliente_id_cliente AND Dvd_Jogo.id_jogo = Aluguel.Dvd_Jogo_id_jogo
